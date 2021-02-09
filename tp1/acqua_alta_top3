@@ -1,0 +1,35 @@
+def top3(mesures):
+    '''
+    Etant donne une sequence de mesures espacees de 10 minutes, identifie les trois mesures les plus élevées.
+
+    pre: - mesures est un tableau (list)
+         - len(mesures) >= 3
+    post: renvoie un tableau t de longueur 3 tel que mesures[t[i]] correspond à la i^eme mesure la plus elevee. Si plusieurs mesures identiques sont raportées, les indices de ses mesures sont ordonnés.
+    '''
+    t = [0, 0, 0]
+    for i in range(len(mesures)):
+        if i != 0:
+            if mesures[i] > mesures[t[0]]:
+                if mesures[t[0]] > mesures[t[1]]:
+                    t[2] = t[1]
+                    t[1] = t[0]
+
+                t[0] = i
+
+            else:
+                if t[0] == t[1]:
+                    t[1] = i
+                if mesures[i] > mesures[t[1]]:
+
+                    if mesures[t[1]] > mesures[t[2]]:
+                        t[2] = t[1]
+
+                    t[1] = i
+                else:
+                    if t[0] == t[2]:
+                        t[2] = i
+                    if t[1] == t[2]:
+                        t[2] = i
+                    if mesures[i] > mesures[t[2]]:
+                        t[2] = i
+    return t
